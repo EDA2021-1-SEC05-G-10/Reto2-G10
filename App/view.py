@@ -40,6 +40,20 @@ def printMenu():
     print("1- Cargar información en el catálogo")
     print("2- ")
 
+
+def initCatalog(b):
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalog(b)
+
+def loadData(catalog):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(catalog)
+
+    
 catalog = None
 
 """

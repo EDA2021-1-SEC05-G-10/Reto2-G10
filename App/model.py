@@ -1,4 +1,4 @@
-﻿"""
+"""
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -49,14 +49,16 @@ def newCatalog(tipo_list):
                'category': None,
                }
 
-    catalog['videos'] = mp.newMap(tipo_list,cmpfunction)
-    catalog['category'] = mp.newMap(tipo_list,cmpfunction)
+    catalog['videos'] = mp.newMap(tipo_list)
+    catalog['category'] = mp.newMap(tipo_list)
     return catalog
 
 
 def addVideos(catalog, video):
     # Se adiciona el video a la lista de videos
-    mp.put(catalog['videos'], video['category'], video)
+    #mp.put(catalog['videos'], video['category'], video)
+    lt.addLast(catalog['videos'], video)
+
 
 # Funciones para agregar informacion al catalogo
 
@@ -67,3 +69,6 @@ def addVideos(catalog, video):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+
+
