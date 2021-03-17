@@ -25,6 +25,7 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
+import time
 
 
 """
@@ -48,7 +49,13 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        t1 = time.process_time()
         print("Cargando información de los archivos ....")
+        b = str(input("elija si quiere LINKED_LIST O ARRAY_LIST"))
+        catalog = initCatalog(b)
+        loadData(catalog)
+        t2 = time.process_time()
+        print("El tiempo para ejecutar esta operacion fue de: " +str(t2-t1) + " segundos")
 
     elif int(inputs[0]) == 2:
         pass

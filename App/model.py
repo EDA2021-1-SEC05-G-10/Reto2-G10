@@ -38,6 +38,25 @@ los mismos.
 """
 
 # Construccion de modelos
+def newCatalog(tipo_list):
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los libros, adicionalmente, crea una lista vacia para los autores,
+    una lista vacia para los generos y una lista vacia para la asociación
+    generos y libros. Retorna el catalogo inicializado.
+    """
+    catalog = {'videos': None,
+               'category': None,
+               }
+
+    catalog['videos'] = mp.newMap(tipo_list,cmpfunction)
+    catalog['category'] = mp.newMap(tipo_list,cmpfunction)
+    return catalog
+
+
+def addVideos(catalog, video):
+    # Se adiciona el video a la lista de videos
+    mp.put(catalog['videos'], video['category'], video)
 
 # Funciones para agregar informacion al catalogo
 
