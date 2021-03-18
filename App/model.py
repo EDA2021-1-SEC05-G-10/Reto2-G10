@@ -80,17 +80,17 @@ def addVideoCategory(catalog, video):
     try:
         category = catalog['category']
         if (video['category_id'] != ''):
-            pubyear = video['category_id']
-            pubyear = pubyear
+            pubcategory = video['category_id']
+            pubcategory = pubcategory
        
-        existyear = mp.contains(category, pubyear)
+        existyear = mp.contains(category, pubcategory)
         if existyear:
-            entry = mp.get(category, pubyear)
-            year = me.getValue(entry)
+            entry = mp.get(category, pubcategory)
+            category_1 = me.getValue(entry)
         else:
-            year = newYear(pubyear)
-            mp.put(category, pubyear, year)
-        lt.addLast(year['videos'], video)
+            category_1 = newYear(pubcategory)
+            mp.put(category, pubcategory, category_1)
+        lt.addLast(category_1['videos'], video)
     except Exception:
         return None
 
