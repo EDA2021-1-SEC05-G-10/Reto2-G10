@@ -23,18 +23,18 @@
 import config as cf
 import model
 import csv
-
+import string
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 # Inicialización del Catálogo de libros
-def initCatalog(tipo_list):
+def initCatalog():
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
-    catalog = model.newCatalog(tipo_list)
+    catalog = model.newCatalog()
     return catalog
 
 
@@ -58,7 +58,22 @@ def loadVideos(catalog):
     for video in input_file:
         model.addVideos(catalog, video)
 
-        
+
+def req1(category_name, country, num_vids, lista, categorias):
+    a = model.n_videos_by_category(category_name, country, num_vids, lista, categorias)
+    return a 
+
+def loadCategories():
+    category = cf.data_dir + 'category-id.csv'
+    input_file = csv.DictReader(open(category, encoding='utf-8'))
+    diccionario = {}
+    for categoria in input_file:
+        nombre = categoria['id\tname'].translate({ord(c): None for c in string.whitespace})
+        resultado = ''.join([i for i in nombre if not i.isdigit()])
+        numeric_filter = filter(str.isdigit, nombre)
+        numeric_string = "".join(numeric_filter)
+        diccionario[numeric_string] = resultado
+    return diccionario  
 # Funciones de ordenamiento
 
 # Funciones de consulta sobre el catálogo
