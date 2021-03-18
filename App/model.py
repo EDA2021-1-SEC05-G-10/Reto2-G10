@@ -1,4 +1,4 @@
-"""
+﻿"""
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -56,8 +56,8 @@ def newCatalog(tipo_list):
 
 def addVideos(catalog, video):
     # Se adiciona el video a la lista de videos
-    #mp.put(catalog['videos'], video['category'], video)
-    lt.addLast(catalog['videos'], video)
+    mp.put(catalog['videos'], video['category'], video)
+    #lt.addLast(catalog['videos'], video)
 
 
 # Funciones para agregar informacion al catalogo
