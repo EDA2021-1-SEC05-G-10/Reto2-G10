@@ -68,7 +68,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Inicializando Catálogo ....")
-        cont = controller.initCatalog('PROBING')
+        cont = controller.initCatalog('CHAINING')
 
     elif int(inputs[0]) == 2:
         print("Cargando información de los archivos ....")

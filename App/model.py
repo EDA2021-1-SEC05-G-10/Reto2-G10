@@ -54,7 +54,7 @@ def newCatalog(tipo):
     catalog['videos'] = lt.newList('SINGLE_LINKED', comparevideos)
     catalog['category'] = mp.newMap(10000,
                                    maptype=tipo,
-                                   loadfactor=0.30,
+                                   loadfactor=6.00,
                                    comparefunction=compareMapBookIds)
     return catalog
 
