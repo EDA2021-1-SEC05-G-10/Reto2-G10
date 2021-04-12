@@ -93,6 +93,13 @@ def loadCategories():
         diccionario[numeric_string] = resultado
     return diccionario  
 
+def showCategories():
+    category = cf.data_dir + 'category-id.csv'
+    input_file = csv.DictReader(open(category, encoding='utf-8'))
+    for categoria in input_file:
+        nombre = categoria['id\tname']
+        print(nombre)
+        
 def getTime():
     """
     devuelve el instante tiempo de procesamiento en milisegundos

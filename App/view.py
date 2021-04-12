@@ -58,6 +58,8 @@ def loadData(catalog):
 def loadCategories():
     return controller.loadCategories()
 
+def showCategories():
+    return controller.showCategories()
 catalog = None
 
 """
@@ -73,6 +75,9 @@ while True:
     elif int(inputs[0]) == 2:
         print("Cargando información de los archivos ....")
         answer = controller.loadData(cont)
+        print("Videos cargados: ", lt.size(cont['videos']))
+        print("categorias cargadas: ")
+        showCategories()
         print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
               "Memoria [kB]: ", f"{answer[1]:.3f}")
         
