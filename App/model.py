@@ -33,6 +33,8 @@ from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.DataStructures import listiterator as it
 import math
 assert cf
+import time
+import tracemalloc
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -161,4 +163,99 @@ def n_videos_by_category(category_name, country, num_vids, lista, categorias)->l
                     resultado.pop(posicion)
                     resultado.append({"trending_date": elemento["trending_date"], "title": elemento["title"], "channel title": elemento["channel_title"], 
                     "publish time": elemento["publish_time"], "views": elemento["views"], "likes": elemento["likes"], "dislikes": elemento["dislikes"]})
+    
+    return resultado 
+
+def video_trending_pais(country, lista,)->dict:
+    mayor = 0 
+    aux =[] 
+    dict_final = {}      
+    iterador = it.newIterator(lista)
+    contador2 = 0
+    while it.hasNext(iterador):
+        elemento = it.next(iterador)
+        centinela = True  
+        contador = 0     
+
+        if (str(elemento['country'])) == country:
+            while contador < len(aux):
+                if (elemento['video_id']== aux[contador]["video_id"]):
+                    aux[contador]["numero de dias"] += 1
+                    centinela = False
+                contador +=1
+
+            if centinela == True:
+                aux.append({"title": elemento["title"], "channel_title": elemento["channel_title"], 
+                "country": elemento["country"], "video_id": elemento["video_id"], "numero de dias": 1})
+
+    while contador2 < len(aux):
+        if int(aux[contador2]["numero de dias"]) >= mayor:
+            dict_final["title"] = aux[contador2]["title"]
+            dict_final["channel_title"] = aux[contador2]["channel_title"]
+            dict_final["country"] = country
+            dict_final["numero de dias"] = aux[contador2]["numero de dias"]
+            mayor = aux[contador2]["numero de dias"]
+
+        contador2 +=1
+    return dict_final 
+
+def video_trending_categoria(category_name, lista, categorias)->dict:
+    for i in categorias:
+        if categorias[i] == category_name:
+            numero_categoria = int(i)
+
+    mayor = 0 
+    aux =[] 
+    dict_final = {}      
+    iterador = it.newIterator(lista)
+    contador2 = 0
+    while it.hasNext(iterador):
+        elemento = it.next(iterador)
+        centinela = True  
+        contador = 0     
+
+        if numero_categoria == int(elemento['category_id']):
+            while contador < len(aux):
+                if (elemento['title']== aux[contador]["title"]):
+                    aux[contador]["numero de dias"] += 1
+                    centinela = False
+                contador +=1
+
+            if centinela == True:
+                aux.append({"title": elemento["title"], "channel_title": elemento["channel_title"], 
+                "category_id": elemento["category_id"], "numero de dias": 1, "dates": str(elemento["trending_date"])})
+
+    while contador2 < len(aux):
+        if int(aux[contador2]["numero de dias"]) > mayor:
+            dict_final["title"] = aux[contador2]["title"]
+            dict_final["channel_title"] = aux[contador2]["channel_title"]
+            dict_final["category_id"] = numero_categoria
+            dict_final["numero de dias"] = aux[contador2]["numero de dias"]
+            mayor = int(aux[contador2]["numero de dias"])
+
+        contador2 +=1
+    return dict_final
+
+def n_videos_by_tag(tag, country, num_vids, lista)->list:
+    resultado = []
+    
+    iterador = it.newIterator(lista)
+    while it.hasNext(iterador):
+        elemento = it.next(iterador)
+        menor = math.inf
+        contador2 = 0
+        if (str(elemento['country']) == country) and tag in str(elemento["tags"]).lower(): 
+            if len(resultado) < num_vids:
+                resultado.append({"title": elemento["title"], "channel title": elemento["channel_title"], "publish time": elemento["publish_time"], 
+                "views": elemento["views"], "likes": elemento["likes"], "dislikes": elemento["dislikes"], "tags": elemento["tags"]})
+            else:
+                while contador2 < len(resultado):
+                    if float(resultado[contador2]["likes"]) < menor:
+                        menor = float(resultado[contador2]["likes"])
+                        posicion = contador2
+                    contador2 += 1
+                if float(elemento['likes']) > menor:
+                    resultado.pop(posicion)
+                    resultado.append({"title": elemento["title"], "channel title": elemento["channel_title"], "publish time": elemento["publish_time"],
+                    "views": elemento["views"], "likes": elemento["likes"], "dislikes": elemento["dislikes"], "tags": elemento["tags"]})
     return resultado

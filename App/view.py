@@ -40,7 +40,10 @@ def printMenu():
     print("Bienvenido")
     print("1- Inicializar catalogo")
     print("2- Cargar información en el catálogo")
-    print("3- Cargar los n videos con mas likes para el nombre de una categoria especifica")
+    print("3- Cargar los n videos con mas views para el nombre de una categoria especifica (req1)")
+    print("4 - Consultar el video que más dias ha sido trending para un pais (requerimiento 2)")
+    print("5 - Consultar el video que más dias ha sido trending para una categoria (requerimiento 3)")
+    print("6 - Consultar n videos con mas likes (requerimiento 4)")
 
 
 def initCatalog(tipo):
@@ -85,7 +88,24 @@ while True:
         category_name = str(input("ingrese el nombre de la categoria que desea buscar")).translate({ord(c): None for c in string.whitespace})
         country = str(input("ingrese el nombre del pais por el que desea buscar"))
         num_vids = int(input("ingrese el numero de videos que desea listar"))
-        a = controller.req1(category_name, country, num_vids, catalog['videos'], loadCategories())
+        a = controller.req1(category_name, country, num_vids, cont['videos'], loadCategories())
+        print(a)
+    
+    elif int(inputs[0]) == 4:
+        country = str(input("ingrese el nombre del pais por el que desea buscar"))
+        a = controller.req2(country, cont['videos'])
+        print(a)
+
+    elif int(inputs[0]) == 5:
+        category_name = str(input("ingrese el nombre de la categoria que desea buscar")).translate({ord(c): None for c in string.whitespace})
+        a = controller.req3(category_name, cont['videos'], loadCategories())
+        print(a)
+
+    elif int(inputs[0]) == 6:
+        tag = str(input("ingrese el nombre del tag que desea buscar"))
+        country = str(input("ingrese el nombre del pais por el que desea buscar"))
+        num_vids = int(input("ingrese el numero de videos que desea listar"))
+        a = controller.req4(tag, country, num_vids, cont['videos'])
         print(a)
 
     else:

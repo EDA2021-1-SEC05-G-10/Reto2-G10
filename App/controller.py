@@ -78,7 +78,83 @@ def loadVideos(catalog):
 
 
 def req1(category_name, country, num_vids, lista, categorias):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
     a = model.n_videos_by_category(category_name, country, num_vids, lista, categorias)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    print("Tiempo [ms]: ", delta_time, "  ||  ",
+            "Memoria [kB]: ", delta_memory)
+    return a 
+
+def req2(country, lista):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
+    a = model.video_trending_pais(country, lista,)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    print("Tiempo [ms]: ", delta_time, "  ||  ",
+            "Memoria [kB]: ", delta_memory)
+    return a
+
+def req3(category_name, lista, categorias):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
+    a = model.video_trending_categoria(category_name, lista, categorias)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    print("Tiempo [ms]: ", delta_time, "  ||  ",
+            "Memoria [kB]: ", delta_memory)
+    return a 
+
+def req4(tag, country, num_vids, lista):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
+    a = model.n_videos_by_tag(tag, country, num_vids, lista)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    print("Tiempo [ms]: ", delta_time, "  ||  ",
+            "Memoria [kB]: ", delta_memory)
     return a 
 
 def loadCategories():
@@ -99,7 +175,7 @@ def showCategories():
     for categoria in input_file:
         nombre = categoria['id\tname']
         print(nombre)
-        
+
 def getTime():
     """
     devuelve el instante tiempo de procesamiento en milisegundos
